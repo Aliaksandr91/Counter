@@ -1,0 +1,18 @@
+button {
+    margin: 0;
+    width: 45%;
+    overflow: visible;
+    background-color: #6ee4ff;
+    color: inherit;
+    font: inherit;
+    font-weight: bold;
+    line-height: normal;
+    border: 2px solid #6ee4ff;
+    cursor: pointer;
+}
+.active {
+    opacity: 1;
+}
+.disabled {
+    opacity: 0.5;
+}
