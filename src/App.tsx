@@ -4,13 +4,15 @@ import {Counter} from "./components/Counter/Counter";
 import {Settings} from "./components/Settings/Settings";
 
 function App() {
-    const [count, setCount] = useState(0)
+    let startValue = 0;
+    let maxValue = 5
+    const [count, setCount] = useState(startValue)
     const addCount = () => {
-        if (count < 5) {
+        if (count < maxValue) {
             setCount(count + 1)
         }
     }
-    const resetCount = () => setCount(0)
+    const resetCount = () => setCount(startValue)
     const setValue = () => {}
   return (
     <div className="App">
@@ -18,6 +20,8 @@ function App() {
             setValue = { setValue }
         />
         <Counter
+            startValue = {startValue}
+            maxValue={ maxValue }
             count={ count }
             addCount={ addCount }
             resetCount={ resetCount }
