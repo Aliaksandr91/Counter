@@ -8,7 +8,7 @@ type PropsType = {
     resetCount: () => void
 }
 
-export const Counter = (props:PropsType) => {
+export const Counter = (props: PropsType) => {
     return (
         <div className='counter'>
             <div className='counter__screen'>{props.count}</div>
