@@ -12,7 +12,7 @@ export const Settings = (props:PropsType) => {
                 <div>start value<input type="number"/></div>
             </div>
             <div className='settings__controls'>
-                <Button name={'set'} callBack={props.setValue} className={'active'}/>
+                <Button name={'set'} callBack={props.setValue} disabledStatus={false}/>
             </div>
         </div>
     )

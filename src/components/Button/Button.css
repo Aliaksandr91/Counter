@@ -9,10 +9,8 @@ button {
     line-height: normal;
     border: 2px solid #6ee4ff;
     cursor: pointer;
-}
-.active {
     opacity: 1;
 }
-.disabled {
+button:disabled {
     opacity: 0.5;
 }

@@ -3,11 +3,11 @@ import "./Button.css"
 type PropsType = {
     name: string
     callBack: ()=> void
-    className: string
+    disabledStatus: boolean
 }
 
 export const Button = (props: PropsType) => {
     return (
-        <button onClick={props.callBack} className={props.className}>{props.name}</button>
+        <button onClick={props.callBack} disabled={props.disabledStatus}>{props.name}</button>
     )
 }
