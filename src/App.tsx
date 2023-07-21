@@ -15,11 +15,12 @@ function App() {
     }
     const resetCount = () => setCount(startValue)
 
-    const onStartValueChange = (newValue:number) => {
-        setCount(newValue)
+    const onStartValueChange = () => {
+
     }
 
-    const setValue = () => {
+    const setValue = (newStartValue:number) => {
+        setCount(newStartValue)
     }
   return (
     <div className="App">

@@ -1,17 +1,22 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {Button} from "../Button/Button";
 import './Settings.css'
 type PropsType = {
-    setValue: () => void
-    onStartValueChange: (newValue:number) => void
+    setValue: (v:number) => void
+    onStartValueChange: () => void
     startValue: number
     maxValue:number
     count: number
 }
 export const Settings = (props:PropsType) => {
+
+    const [value, setValue] = useState<number>(props.startValue)
+    //let newValue = props.startValue
     const handleInputChange = (event:ChangeEvent<HTMLInputElement>) => {
-        const newStartValue = +event.currentTarget.value
-        props.onStartValueChange(newStartValue)
+        let newValue = +event.currentTarget.value
+        setValue(newValue)
+        props.onStartValueChange()
+
     }
     return(
         <div className='settings'>
@@ -21,13 +26,13 @@ export const Settings = (props:PropsType) => {
                     start value
                     <input
                         type="number"
-                        value={props.count}
+                        value={value}
                         onChange={handleInputChange}
                     />
                 </div>
             </div>
             <div className='settings__controls'>
-                <Button name={'set'} callBack={props.setValue} disabledStatus={false}/>
+                <Button name={'set'} callBack={()=>props.setValue(value)} disabledStatus={false}/>
             </div>
         </div>
     )
