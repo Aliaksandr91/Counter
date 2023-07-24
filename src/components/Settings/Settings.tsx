@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import {Button} from "../Button/Button";
 import './Settings.css'
 type PropsType = {
-    setValue: (v:number) => void
+    setValue: (value:number) => void
     onStartValueChange: () => void
     startValue: number
     maxValue:number

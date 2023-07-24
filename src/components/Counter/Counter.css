@@ -18,6 +18,10 @@
     background-color: #6ee4ff;
     margin-bottom: 10px;
 }
+
+.counter__screen--max {
+    color: red;
+}
 .counter__controls {
     display: flex;
     align-items: center;

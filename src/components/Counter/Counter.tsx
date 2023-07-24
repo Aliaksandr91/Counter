@@ -15,7 +15,11 @@ export const Counter = (props: PropsType) => {
     const resetDisabled = props.count <= props.maxValue && props.count !== props.startValue
     return (
         <div className='counter'>
-            <div className='counter__screen'>{props.count}</div>
+            <div
+                className={incDisabled ? 'counter__screen' : 'counter__screen counter__screen--max'}
+            >
+                {props.count}
+            </div>
             <div className='counter__controls'>
                 <Button
                     name={"inc"}
