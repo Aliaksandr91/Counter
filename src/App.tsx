@@ -2,13 +2,20 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./components/Counter/Counter";
 import {Settings} from "./components/Settings/Settings";
+
+
 export const getStartInputValue = () => {
     const valueAsString = localStorage.getItem('inputValue')
     return valueAsString ? JSON.parse(valueAsString) : 0
 }
+export const getMaxInputValue = () => {
+    const valueAsString = localStorage.getItem('counterValueMax')
+    return valueAsString ? JSON.parse(valueAsString) : 5
+}
+
 function App() {
     let startValue = 0
-    let maxValue = 5
+    let maxValue = getMaxInputValue()
 
     const getStartValue = () => {
         const valueAsString = localStorage.getItem('counterValue')
@@ -18,6 +25,7 @@ function App() {
 
 
     const [count, setCount] = useState<number>(getStartValue)
+
 
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify(count))
@@ -33,13 +41,12 @@ function App() {
     const resetCount = () => setCount(getStartInputValue)
 
 
-    const onStartValueChange = () => {
-
-    }
 
     const setValue = (newStartValue: number) => {
         setCount(newStartValue)
     }
+
+
     return (
         <div className="App">
             <Settings
@@ -47,7 +54,7 @@ function App() {
                 setValue={setValue}
                 startValue={startValue}
                 maxValue={maxValue}
-                onStartValueChange={onStartValueChange}
+
             />
             <Counter
                 startValue={startValue}
