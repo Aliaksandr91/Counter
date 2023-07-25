@@ -1,6 +1,7 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {Button} from "../Button/Button";
 import './Settings.css'
+import {getStartInputValue} from "../../App";
 type PropsType = {
     setValue: (value:number) => void
     onStartValueChange: () => void
@@ -8,16 +9,21 @@ type PropsType = {
     maxValue:number
     count: number
 }
+
 export const Settings = (props:PropsType) => {
 
-    const [value, setValue] = useState<number>(props.startValue)
-    //let newValue = props.startValue
+
+    const [value, setValue] = useState<number>(getStartInputValue)
     const handleInputChange = (event:ChangeEvent<HTMLInputElement>) => {
         let newValue = +event.currentTarget.value
         setValue(newValue)
         props.onStartValueChange()
-
     }
+
+    useEffect(() => {
+        localStorage.setItem('inputValue', JSON.stringify(value))
+    }, [value])
+
     return(
         <div className='settings'>
             <div className='settings__screen'>
