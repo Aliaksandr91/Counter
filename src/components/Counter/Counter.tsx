@@ -11,12 +11,12 @@ type PropsType = {
 }
 
 export const Counter = (props: PropsType) => {
-    const incDisabled = props.count < props.maxValue;
-    const resetDisabled = props.count <= props.maxValue && props.count !== props.startValue
+    const incDisabled = props.count >= props.maxValue;
+    const resetDisabled =  props.count === props.startValue
     return (
         <div className='counter'>
             <div
-                className={incDisabled ? 'counter__screen' : 'counter__screen counter__screen--max'}
+                className={incDisabled ? 'counter__screen counter__screen--max' : 'counter__screen'}
             >
                 {props.count}
             </div>
@@ -24,12 +24,12 @@ export const Counter = (props: PropsType) => {
                 <Button
                     name={"inc"}
                     callBack={props.addCount}
-                    disabledStatus={!incDisabled}
+                    disabledStatus={incDisabled}
                 />
                 <Button
                     name={'reset'}
                     callBack={props.resetCount}
-                    disabledStatus={!resetDisabled}
+                    disabledStatus={resetDisabled}
                 />
             </div>
         </div>

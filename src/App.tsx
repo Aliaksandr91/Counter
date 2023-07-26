@@ -14,24 +14,16 @@ export const getMaxInputValue = () => {
 }
 
 function App() {
-    let startValue = 0
-    let maxValue = getMaxInputValue()
+    const startValue:number = getStartInputValue()
+    const maxValue:number = getMaxInputValue()
 
-    const getStartValue = () => {
-        const valueAsString = localStorage.getItem('counterValue')
-        return valueAsString ? JSON.parse(valueAsString) : 0
-    }
-
-
-
-    const [count, setCount] = useState<number>(getStartValue)
+    const [count, setCount] = useState<number>(startValue)
 
 
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify(count))
         localStorage.getItem('counterValue')
     }, [count])
-
 
     const addCount = () => {
         if (count < maxValue) {
@@ -40,12 +32,9 @@ function App() {
     }
     const resetCount = () => setCount(getStartInputValue)
 
-
-
     const setValue = (newStartValue: number) => {
         setCount(newStartValue)
     }
-
 
     return (
         <div className="App">
