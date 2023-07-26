@@ -4,15 +4,15 @@ import './Counter.css'
 
 type PropsType = {
     count: number
-    startValue: number
+    initialValue: number
     maxValue: number
-    addCount: () => void
-    resetCount: () => void
+    onIncrementCount: () => void
+    onResetCount: () => void
 }
 
 export const Counter = (props: PropsType) => {
-    const incDisabled = props.count >= props.maxValue;
-    const resetDisabled =  props.count === props.startValue
+    const incDisabled:boolean = props.count >= props.maxValue;
+    const resetDisabled:boolean =  props.count === props.initialValue
     return (
         <div className='counter'>
             <div
@@ -23,12 +23,12 @@ export const Counter = (props: PropsType) => {
             <div className='counter__controls'>
                 <Button
                     name={"inc"}
-                    callBack={props.addCount}
+                    callBack={props.onIncrementCount}
                     disabledStatus={incDisabled}
                 />
                 <Button
                     name={'reset'}
-                    callBack={props.resetCount}
+                    callBack={props.onResetCount}
                     disabledStatus={resetDisabled}
                 />
             </div>

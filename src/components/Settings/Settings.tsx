@@ -1,34 +1,31 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {Button} from "../Button/Button";
 import './Settings.css'
-import {getMaxInputValue, getStartInputValue} from "../../App";
 type PropsType = {
-    setValue: (value:number) => void
-    startValue: number
-    maxValue:number
-    count: number
+    initialValue: number;
+    maxValue: number;
+    onApplyChanges: (initialValue: number, maxValue: number) => void;
 }
 
 export const Settings = (props:PropsType) => {
-    const [value, setValue] = useState<number>(getStartInputValue)
-    const [maxValue, setMaxValue] = useState<number>(getMaxInputValue)
+    const [newInitialValue, setNewInitialValue] = useState<number>(props.initialValue);
+    const [newMaxValue, setNewMaxValue] = useState<number>(props.maxValue);
+
     const handleInputChangeValue = (event:ChangeEvent<HTMLInputElement>) => {
-        let newValue = +event.currentTarget.value
-        setValue(newValue)
+        let value = +event.currentTarget.value
+        setNewInitialValue(Number(value));
     }
 
     const handleInputChangeMaxValue = (event:ChangeEvent<HTMLInputElement>) => {
-        let newMaxValue = +event.currentTarget.value
-        setMaxValue(newMaxValue)
+        let value = +event.currentTarget.value
+        setNewMaxValue(value)
     }
 
-    useEffect(() => {
-        localStorage.setItem('inputValue', JSON.stringify(value))
-    }, [value])
 
-    useEffect(() => {
-        localStorage.setItem('counterValueMax', JSON.stringify(maxValue))
-    }, [maxValue])
+    const handleApplyChanges = () => {
+        props.onApplyChanges(newInitialValue, newMaxValue);
+    };
+
 
     return(
         <div className='settings'>
@@ -37,7 +34,7 @@ export const Settings = (props:PropsType) => {
                     max value
                     <input
                         type="number"
-                        value={maxValue}
+                        value={newMaxValue}
                         onChange={handleInputChangeMaxValue}
                     />
                 </div>
@@ -45,13 +42,13 @@ export const Settings = (props:PropsType) => {
                     start value
                     <input
                         type="number"
-                        value={value}
+                        value={newInitialValue}
                         onChange={handleInputChangeValue}
                     />
                 </div>
             </div>
             <div className='settings__controls'>
-                <Button name={'set'} callBack={()=>props.setValue(value)} disabledStatus={false}/>
+                <Button name={'set'} callBack={handleApplyChanges} disabledStatus={false}/>
             </div>
         </div>
     )
