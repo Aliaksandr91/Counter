@@ -44,7 +44,7 @@ function App() {
     }
     const handleResetCount = () => setCount(initialValue)
 
-    const handleChangeStatusScreen = (status:boolean) => setScreenStatus(status)
+    const handleChangeStatusScreen = (status: boolean) => setScreenStatus(status)
 
     const handleApplyChanges = (newInitialValue: number, newMaxValue: number) => {
         setInitialValue(newInitialValue);
@@ -69,9 +69,9 @@ function App() {
                 initialValue={initialValue}
                 maxValue={maxValue}
                 count={count}
+                screenStatus={screenStatus}
                 onIncrementCount={handleIncrementCount}
                 onResetCount={handleResetCount}
-                screenStatus={screenStatus}
             />
         </div>
     );

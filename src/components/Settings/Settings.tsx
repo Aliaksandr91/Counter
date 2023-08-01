@@ -13,25 +13,42 @@ type PropsType = {
 export const Settings = (props: PropsType) => {
     const [newInitialValue, setNewInitialValue] = useState<number>(props.initialValue);
     const [newMaxValue, setNewMaxValue] = useState<number>(props.maxValue);
+    const [errorStatusInput, setErrorStatusInput] = useState<boolean>(false)
+
+
+    const inputClass = errorStatusInput ? 'inp--error' : '' // need to fix with (?:)
 
     const handleInputChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
         let value = +event.currentTarget.value
-        setNewInitialValue(Number(value));
-        props.onChangeStatusScreen(false)
+        if (value < newMaxValue && value >= 0) {
+            setErrorStatusInput(false)
+            setNewInitialValue(Number(value));
+            props.onChangeStatusScreen(false)
+        } else {
+            setNewInitialValue(Number(value));
+            setErrorStatusInput(true)
+        }
     }
 
     const handleInputChangeMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
         let value = +event.currentTarget.value
-        setNewMaxValue(value)
-        props.onChangeStatusScreen(false)
-    }
+        if (value > newInitialValue && value >= 0) {
+            setErrorStatusInput(false)
+            setNewMaxValue(value)
+            props.onChangeStatusScreen(false)
+        } else {
+            setNewMaxValue(Number(value));
+            setErrorStatusInput(true)
+        }
 
+
+
+    }
 
     const handleApplyChanges = () => {
         props.onApplyChanges(newInitialValue, newMaxValue);
         props.onChangeStatusScreen(true)
     };
-
 
     return (
         <div className='settings'>
@@ -40,11 +57,13 @@ export const Settings = (props: PropsType) => {
                     value={newMaxValue}
                     callBack={handleInputChangeMaxValue}
                     name={'max value'}
+                    className={inputClass}
                 />
                 <Input
                     value={newInitialValue}
                     callBack={handleInputChangeValue}
                     name={'start value'}
+                    className={inputClass}
                 />
             </div>
             <div className='settings__controls'>
