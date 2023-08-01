@@ -6,20 +6,22 @@ type PropsType = {
     count: number
     initialValue: number
     maxValue: number
+    screenStatus: boolean
     onIncrementCount: () => void
     onResetCount: () => void
 }
 
 export const Counter = (props: PropsType) => {
-    const incDisabled:boolean = props.count >= props.maxValue;
-    const resetDisabled:boolean =  props.count === props.initialValue
+    const incDisabled: boolean = props.count >= props.maxValue;
+    const resetDisabled: boolean = props.count === props.initialValue
     return (
         <div className='counter'>
-            <div
-                className={incDisabled ? 'counter__screen counter__screen--max' : 'counter__screen'}
-            >
-                {props.count}
-            </div>
+            {props.screenStatus
+                ? <div className={incDisabled ? 'counter__screen counter__screen--max' : 'counter__screen'}>{props.count}</div>
+                : <div className='counter__screen counter__screen--text'>enter values and press 'set'</div>
+            }
+
+
             <div className='counter__controls'>
                 <Button
                     name={"inc"}

@@ -22,6 +22,11 @@
 .counter__screen--max {
     color: red;
 }
+.counter__screen--text {
+    font-size: 20px;
+    background-color: transparent;
+    color:#6ee4ff;
+}
 .counter__controls {
     display: flex;
     align-items: center;

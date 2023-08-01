@@ -32,8 +32,16 @@ export const Settings = (props: PropsType) => {
     return (
         <div className='settings'>
             <div className='settings__screen'>
-                <Input value={newMaxValue} callBack={handleInputChangeMaxValue} name={'max value'}/>
-                <Input value={newInitialValue} callBack={handleInputChangeValue} name={'start value'}/>
+                <Input
+                    value={newMaxValue}
+                    callBack={handleInputChangeMaxValue}
+                    name={'max value'}
+                />
+                <Input
+                    value={newInitialValue}
+                    callBack={handleInputChangeValue}
+                    name={'start value'}
+                />
             </div>
             <div className='settings__controls'>
                 <Button name={'set'} callBack={handleApplyChanges} disabledStatus={false}/>

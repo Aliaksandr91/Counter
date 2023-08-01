@@ -20,6 +20,8 @@ function App() {
         return storedValue ? Number(storedValue) : 5;
     });
 
+    const [screenStatus, setscreenStatus] = useState<boolean>(true);
+
     useEffect(() => {
         // Сохраняем текущее значение счетчика в localStorage
         localStorage.setItem('count', count.toString());
@@ -66,6 +68,7 @@ function App() {
                 count={count}
                 onIncrementCount={handleIncrementCount}
                 onResetCount={handleResetCount}
+                screenStatus={screenStatus}
             />
         </div>
     );
