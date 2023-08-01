@@ -20,7 +20,7 @@ function App() {
         return storedValue ? Number(storedValue) : 5;
     });
 
-    const [screenStatus, setscreenStatus] = useState<boolean>(true);
+    const [screenStatus, setScreenStatus] = useState<boolean>(true);
 
     useEffect(() => {
         // Сохраняем текущее значение счетчика в localStorage
@@ -44,6 +44,8 @@ function App() {
     }
     const handleResetCount = () => setCount(initialValue)
 
+    const handleChangeStatusScreen = (status:boolean) => setScreenStatus(status)
+
     const handleApplyChanges = (newInitialValue: number, newMaxValue: number) => {
         setInitialValue(newInitialValue);
         setCount(newInitialValue);
@@ -61,6 +63,7 @@ function App() {
                 initialValue={initialValue}
                 maxValue={maxValue}
                 onApplyChanges={handleApplyChanges}
+                onChangeStatusScreen={handleChangeStatusScreen}
             />
             <Counter
                 initialValue={initialValue}

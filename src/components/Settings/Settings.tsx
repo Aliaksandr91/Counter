@@ -7,6 +7,7 @@ type PropsType = {
     initialValue: number;
     maxValue: number;
     onApplyChanges: (initialValue: number, maxValue: number) => void;
+    onChangeStatusScreen: (status:boolean) => void
 }
 
 export const Settings = (props: PropsType) => {
@@ -16,16 +17,19 @@ export const Settings = (props: PropsType) => {
     const handleInputChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
         let value = +event.currentTarget.value
         setNewInitialValue(Number(value));
+        props.onChangeStatusScreen(false)
     }
 
     const handleInputChangeMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
         let value = +event.currentTarget.value
         setNewMaxValue(value)
+        props.onChangeStatusScreen(false)
     }
 
 
     const handleApplyChanges = () => {
         props.onApplyChanges(newInitialValue, newMaxValue);
+        props.onChangeStatusScreen(true)
     };
 
 
