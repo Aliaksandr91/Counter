@@ -14,31 +14,41 @@ export const Settings = (props: PropsType) => {
     const [newInitialValue, setNewInitialValue] = useState<number>(props.initialValue);
     const [newMaxValue, setNewMaxValue] = useState<number>(props.maxValue);
     const [errorStatusInput, setErrorStatusInput] = useState<boolean>(false)
+    const [disabledStatusBtn, setDisabledStatusBtn] = useState<boolean>(true)
 
 
-    const inputClass = errorStatusInput ? 'inp--error' : '' // need to fix with (?:)
+    const inputClass = errorStatusInput ? 'inp--error' : ''
+
+    const confirmChanges = () => {
+        setErrorStatusInput(false)
+        setDisabledStatusBtn(false)
+        props.onChangeStatusScreen(false)
+    }
+    const unConfirmChanges = () => {
+        setErrorStatusInput(true)
+        setDisabledStatusBtn(true)
+    }
+
 
     const handleInputChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
         let value = +event.currentTarget.value
         if (value < newMaxValue && value >= 0) {
-            setErrorStatusInput(false)
             setNewInitialValue(Number(value));
-            props.onChangeStatusScreen(false)
+            confirmChanges()
         } else {
             setNewInitialValue(Number(value));
-            setErrorStatusInput(true)
+            unConfirmChanges()
         }
     }
 
     const handleInputChangeMaxValue = (event: ChangeEvent<HTMLInputElement>) => {
         let value = +event.currentTarget.value
         if (value > newInitialValue && value >= 0) {
-            setErrorStatusInput(false)
             setNewMaxValue(value)
-            props.onChangeStatusScreen(false)
+            confirmChanges()
         } else {
             setNewMaxValue(Number(value));
-            setErrorStatusInput(true)
+            unConfirmChanges()
         }
 
 
@@ -47,6 +57,7 @@ export const Settings = (props: PropsType) => {
 
     const handleApplyChanges = () => {
         props.onApplyChanges(newInitialValue, newMaxValue);
+        setDisabledStatusBtn(true)
         props.onChangeStatusScreen(true)
     };
 
@@ -67,7 +78,7 @@ export const Settings = (props: PropsType) => {
                 />
             </div>
             <div className='settings__controls'>
-                <Button name={'set'} callBack={handleApplyChanges} disabledStatus={false}/>
+                <Button name={'set'} callBack={handleApplyChanges} disabledStatus={disabledStatusBtn}/>
             </div>
         </div>
     )
