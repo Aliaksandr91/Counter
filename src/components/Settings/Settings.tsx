@@ -2,13 +2,15 @@ import React, {ChangeEvent, useState} from "react";
 import {Button} from "../Button/Button";
 import './Settings.css'
 import {Input} from "../Input/Input";
+import {ScreenValuesType} from "../../App";
 
 type PropsType = {
     initialValue: number;
     maxValue: number;
     onApplyChanges: (initialValue: number, maxValue: number) => void;
-    onChangeStatusScreen: (status:boolean) => void
+    onChangeStatusScreen: (status:ScreenValuesType) => void
 }
+
 
 export const Settings = (props: PropsType) => {
     const [newInitialValue, setNewInitialValue] = useState<number>(props.initialValue);
@@ -22,11 +24,12 @@ export const Settings = (props: PropsType) => {
     const confirmChanges = () => {
         setErrorStatusInput(false)
         setDisabledStatusBtn(false)
-        props.onChangeStatusScreen(false)
+        props.onChangeStatusScreen('settings')
     }
     const unConfirmChanges = () => {
         setErrorStatusInput(true)
         setDisabledStatusBtn(true)
+        props.onChangeStatusScreen('error')
     }
 
 
@@ -50,15 +53,12 @@ export const Settings = (props: PropsType) => {
             setNewMaxValue(Number(value));
             unConfirmChanges()
         }
-
-
-
     }
 
     const handleApplyChanges = () => {
         props.onApplyChanges(newInitialValue, newMaxValue);
         setDisabledStatusBtn(true)
-        props.onChangeStatusScreen(true)
+        props.onChangeStatusScreen('counter')
     };
 
     return (

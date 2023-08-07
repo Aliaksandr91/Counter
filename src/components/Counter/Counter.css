@@ -27,6 +27,11 @@
     background-color: transparent;
     color:#6ee4ff;
 }
+.counter__screen--error {
+    font-size: 20px;
+    background-color: transparent;
+    color:red;
+}
 .counter__controls {
     display: flex;
     align-items: center;

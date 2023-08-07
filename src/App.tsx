@@ -3,6 +3,10 @@ import './App.css';
 import {Counter} from "./components/Counter/Counter";
 import {Settings} from "./components/Settings/Settings";
 
+
+
+export type ScreenValuesType = 'counter' | 'error' | 'settings'
+
 function App() {
 
     const [count, setCount] = useState<number>(() => {
@@ -20,7 +24,7 @@ function App() {
         return storedValue ? Number(storedValue) : 5;
     });
 
-    const [screenStatus, setScreenStatus] = useState<boolean>(true);
+    const [screenStatus, setScreenStatus] = useState<ScreenValuesType>('counter');
 
     useEffect(() => {
         // Сохраняем текущее значение счетчика в localStorage
@@ -44,7 +48,7 @@ function App() {
     }
     const handleResetCount = () => setCount(initialValue)
 
-    const handleChangeStatusScreen = (status: boolean) => setScreenStatus(status)
+    const handleChangeStatusScreen = (status: ScreenValuesType) => setScreenStatus(status)
 
     const handleApplyChanges = (newInitialValue: number, newMaxValue: number) => {
         setInitialValue(newInitialValue);
